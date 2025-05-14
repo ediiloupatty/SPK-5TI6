@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Smartphone Terbaik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #a855f7;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --bg-soft: #f8fafc;
+        }
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-soft);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .page-content {
+            flex: 1 0 auto;
+            width: 100%;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: var(--gradient);
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 20s infinite alternate;
+        }
+
+        .glow-left { left: -300px; top: -300px; }
+        .glow-right { right: -300px; bottom: -300px; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .recommendation-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            margin: 0 auto;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: containerEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes containerEnter {
+            0% { transform: scale(0.9) translateY(50px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-header h1 {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-header p {
+            color: rgba(0,0,0,0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            border-color: rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: rgba(0,0,0,0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-submit {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -10px rgba(99, 102, 241, 0.7);
+        }
+
+        .btn-submit:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+        }
+
+        .info-icon {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .recommendation-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+        }
+
+        .tooltip-inner {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--primary);
+            padding: 4rem 0 2rem;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer h5 {
+            color: #e0e7ff !important;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(224, 231, 255, 0.9) !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent) !important;
+            transform: translateX(8px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(224, 231, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 1rem 0;
+            }
+            
+            .footer {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-left"></div>
+    <div class="glow-effect glow-right"></div>
+
+    <div class="page-content">
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="recommendation-container w-100">
+                <div class="form-header">
+                    <h1 class="display-6">Rekomendasi Smartphone</h1>
+                    <p>Temukan smartphone terbaik yang sesuai dengan kebutuhan Anda menggunakan metode TOPSIS</p>
+                </div>
+
+                <form action="{{ url_for('submit') }}" method="post">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="harga" class="form-label">
+                                    <i class="fas fa-tag info-icon"></i>Harga (Rp)
+                                </label>
+                                <select name="harga" id="harga" class="form-select" required>
+                                    <option value="">Pilih Rentang Harga</option>
+                                    {% for harga in criteria_options.harga %}
+                                    <option value="{{ harga }}">Rp {{ "{:,.0f}".format(harga) }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="baterai" class="form-label">
+                                    <i class="fas fa-battery-full info-icon"></i>Kapasitas Baterai (mAh)
+                                </label>
+                                <select name="baterai" id="baterai" class="form-select" required>
+                                    <option value="">Pilih Kapasitas Baterai</option>
+                                    {% for baterai in criteria_options.baterai %}
+                                    <option value="{{ baterai }}">{{ "{:,.0f}".format(baterai) }} mAh</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ram" class="form-label">
+                                    <i class="fas fa-memory info-icon"></i>RAM (GB)
+                                </label>
+                                <select name="ram" id="ram" class="form-select" required>
+                                    <option value="">Pilih Kapasitas RAM</option>
+                                    {% for ram in criteria_options.ram %}
+                                    <option value="{{ ram }}">{{ ram }} GB</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="penyimpanan" class="form-label">
+                                    <i class="fas fa-hdd info-icon"></i>Penyimpanan (GB)
+                                </label>
+                                <select name="penyimpanan" id="penyimpanan" class="form-select" required>
+                                    <option value="">Pilih Kapasitas Penyimpanan</option>
+                                    {% for penyimpanan in criteria_options.penyimpanan %}
+                                    <option value="{{ penyimpanan }}">{{ penyimpanan }} GB</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kamera_belakang" class="form-label">
+                                    <i class="fas fa-camera info-icon"></i>Kamera Belakang (MP)
+                                </label>
+                                <select name="kamera_belakang" id="kamera_belakang" class="form-select" required>
+                                    <option value="">Pilih Resolusi Kamera Belakang</option>
+                                    {% for kamera_belakang in criteria_options.kamera_belakang %}
+                                    <option value="{{ kamera_belakang }}">{{ kamera_belakang }} MP</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kamera_depan" class="form-label">
+                                    <i class="fas fa-selfie info-icon"></i>Kamera Depan (MP)
+                                </label>
+                                <select name="kamera_depan" id="kamera_depan" class="form-select" required>
+                                    <option value="">Pilih Resolusi Kamera Depan</option>
+                                    {% for kamera_depan in criteria_options.kamera_depan %}
+                                    <option value="{{ kamera_depan }}">{{ kamera_depan }} MP</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="layar" class="form-label">
+                                    <i class="fas fa-mobile-alt info-icon"></i>Ukuran Layar (inci)
+                                </label>
+                                <select name="layar" id="layar" class="form-select" required>
+                                    <option value="">Pilih Ukuran Layar</option>
+                                    {% for layar in criteria_options.layar %}
+                                    <option value="{{ layar }}">{{ layar }} inci</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="os" class="form-label">
+                                            <i class="fas fa-mobile info-icon"></i>Sistem Operasi
+                                        </label>
+                                        <select name="os" id="os" class="form-select">
+                                            <option value="">Pilih Sistem Operasi</option>
+                                            {% for os in criteria_options.os %}
+                                            <option value="{{ os }}">{{ os }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="prosesor" class="form-label">
+                                            <i class="fas fa-microchip info-icon"></i>Prosesor
+                                        </label>
+                                        <select name="prosesor" id="prosesor" class="form-select">
+                                            <option value="">Pilih Prosesor</option>
+                                            {% for prosesor in criteria_options.prosesor %}
+                                            <option value="{{ prosesor }}">{{ prosesor }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-submit mt-3">
+                                <i class="fas fa-search"></i> Cari Rekomendasi
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5>Tentang Kami</h5>
+                    <p class="footer-text" style="color: #e0e7ffcc !important;">
+                        Sistem rekomendasi smartphone berbasis metode TOPSIS untuk membantu Anda menemukan perangkat terbaik sesuai kebutuhan dan preferensi Anda.</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5>Link Cepat</h5>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-home"></i>Beranda</a>
+                        <a href="/hasil"><i class="fas fa-chart-line"></i>Hasil Rekomendasi</a>
+                        <a href="#"><i class="fas fa-address-book"></i>Kontak</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5>Kontak</h5>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-phone"></i>+62 123 4567</a>
+                        <a href="#"><i class="fas fa-envelope"></i>info@spkphone.com</a>
+                        <a href="#"><i class="fas fa-map-marker-alt"></i>Manado, Indonesia</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p class="mb-0" style="color: #e0e7ffb3 !important;">&copy; 2024 SPK Smartphone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Optional: Add form validation and interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent form submission if no option is selected
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                const requiredSelects = form.querySelectorAll('select[required]');
+                let isValid = true;
+
+                requiredSelects.forEach(select => {
+                    if (!select.value) {
+                        isValid = false;
+                        select.classList.add('is-invalid');
+                    } else {
+                        select.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                    // Optional: Show an alert or scroll to first invalid field
+                    const firstInvalid = form.querySelector('.is-invalid');
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                    }
+                }
+            });
+
+            // Add visual feedback to selects
+            const selects = form.querySelectorAll('select');
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    if (this.value) {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('is-valid');
+                    } else {
+                        this.classList.remove('is-valid');
+                        this.classList.add('is-invalid');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
